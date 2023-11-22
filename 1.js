@@ -1,3 +1,3 @@
 export default function () {
-  return "пока";
+  return "Пока";
 }
