@@ -2,7 +2,11 @@ const express = require("express");
 const favicon = require("express-favicon");
 const path = require("path");
 const fs = require("fs");
+
 const app = express("");
+
+const myRoutes = require("./routers/index_routers") 
+
 const ejs = require("ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extendend: true }));
@@ -24,7 +28,7 @@ app.use(
   )
 );
 
-
+app.use(myRoutes())
 
 const port = "3000";
 app.get("/test", (req, res) => {
