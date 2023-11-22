@@ -10,5 +10,4 @@ router.post('/', function(res,req){});
 router.get('/register', function(res,req){});
 router.post('/register', function(res,req){});
 
-
   module.exports = router;

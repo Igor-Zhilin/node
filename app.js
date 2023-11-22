@@ -28,7 +28,7 @@ app.use(
   )
 );
 
-app.use(myRoutes())
+app.use(myRoutes)
 
 const port = "3000";
 app.get("/test", (req, res) => {
