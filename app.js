@@ -12,6 +12,8 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "views")));
 app.use(express.static(path.join(__dirname, "public")));
+
+
 app.use(
   "css/bootstrap.css",
   express.static(
@@ -21,6 +23,8 @@ app.use(
     )
   )
 );
+
+
 
 const port = "3000";
 app.get("/test", (req, res) => {
