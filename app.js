@@ -1,98 +1,119 @@
 const express = require("express");
 const favicon = require("express-favicon");
-const fs = require("fs");
 const path = require("path");
-const { nextTick } = require("process");
+const fs = require("fs");
 const ejs = require("ejs");
+const app = express("");
+const Sequelize = require("sequelize");
+const sqlite = require("sqlite3");
+const myRoutes = require("./routers/index_routers");
+const sequelize = new Sequelize({
+  dialect: "sqlite",
+  storage: "test.sqlite",
+  define: {
+    timestamps: false,
+  },
+});
+app.use(express.json());
+app.use(express.urlencoded({ extendend: true }));
 
-const app = express();
-const port = "3000";
+app.use(myRoutes);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-const routeTest = "/test";
-const routeSlash = "/";
-const filePath = path.join(__dirname, "tmp", "1.txt");
+app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  "css/bootstrap.css",
+  express.static(
+    path.join(
+      __dirname,
+      "../public/css/bootstrap-5.3.2/dist/css/bootstrap.min.css"
+    )
+  )
+);
 
-fs.writeFile(filePath, `Сервер запущен. Порт: ${port}`, (err) => {
-  if (err) console.error(err);
-  console.log("файл создан");
+const port = "3000";
+
+app.listen(port, function () {
+  console.log("Сервер запущен порт " + port);
+  addLine("server started ");
 });
 
-function logger(port, router) {
+function addLine(line) {
+  line = line + "timestamp:" + new Date().toLocaleString();
   fs.appendFile(
-    filePath,
-    `\nЛогируем ping по адресу localhost:${port}${router}. Время: ${new Date()}`,
+    path.join(__dirname + "/public/logger.txt"),
+    line + "\n",
     (err) => {
-      if (err) console.error(err);
-      console.log("файл переписан");
+      if (err);
     }
   );
 }
 
-console.log(app.get("env"));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "views")));
-app.use(
-  "css/bootstrap-5.3.2",
-  express.static(
-    path.join(__dirname, "css/bootstrap-5.3.2/dist/css/bootstrap.min.css")
-  )
-);
-app.use(favicon(__dirname + "/public/favicon.ico"));
-
-app.get(routeTest, (req, res) => {
-  logger(port, routeTest);
-  res.end("/test");
-});
-app.post(routeTest, (req, res) => {
-  console.log("Прошли по пути post/test");
-  logger(port, routeTest);
-  res.end("post/test");
-});
-console.log(__dirname + "/public/favicon.ico");
-app.get(routeSlash, function (req, res) {
-  logger(port, routeSlash);
-  res.end();
-});
-app.get(routeSlash, function (req, res) {
-  logger(port, routeSlash);
-  res.end("/");
-});
-app.post(routeSlash, function (req, res) {
-  logger(port, routeSlash);
-  res.end("/");
+const User = sequelize.define("user", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  age: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
 });
 
+// User.create({
+//   name: "Tom",
+//   age: 35
+// }).then(res=>{
+//   console.log(res);
+// }).catch(err=>console.log(err));
+
+// User.create({
+//   name: "Bob",
+//   age: 31
+// }).then(res=>{
+//   const user = {id: res.id, name: res.name, age: res.age}
+//   console.log(user);
+// }).catch(err=>console.log(err));
+
+User.findAll({raw:true}).then(users=>{
+  console.log(users);
+}).catch(err=>console.log(err));
+
+sequelize
+  .sync()
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => console.log(err));
+
+  
+
+app.use((req, res, next) => {
+  const err = new Error("Could't get path");
+  err.status = 404;
+  ``;
+  next(err);
+});
 app.get("env") == "production";
-console.log(app.get("env"));
+
 if (app.get("env") == "production") {
-  app.use((req, res, err) => {
+  app.use((err, req, res) => {
     res.status(err.status);
     res.sendFile(err.message);
   });
 }
-
-app.listen(port, () => {
-  console.log(`listen on port ${port}`);
-});
-
-//ERROR HANDLER
-app.use((req, res, next) => {
-  const err = new Error("Could't get path");
-  err.status = 404;
-  next(err);
-});
-
-if (app.get("env") != "development") {
+if (app.get(`env`) != "development") {
   app.use(function (err, req, res, next) {
-    console.log(err.status, err.message);
     res.status = 404;
-    link = "https://centralsib.com/media/gallery/kukushka.jpg";
-    res.render("error.ejs", { err, link });
+    res.render("error.ejs"), { err };
   });
 } else {
   app.use(function (err, req, res, next) {
