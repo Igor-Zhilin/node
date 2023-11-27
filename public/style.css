@@ -8,6 +8,7 @@ body {
       letter-spacing: 10px;
     }
 
+<<<<<<< HEAD
     .title {
       text-align: center;
       padding-top: 30px;
@@ -21,6 +22,9 @@ body {
         letter-spacing: -15px;
       }
     }
+=======
+    
+>>>>>>> 6c2144f735ff012ae4fbe7b797c73744a935282b
   }
 }
 footer {
