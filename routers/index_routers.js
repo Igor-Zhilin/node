@@ -1,24 +1,29 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname + "/public/index.html"));
-  addLine("Пинганули get запрос /");
+router.get("/", (req, res) => {
+  res.end("/");
 });
-router.post("/", function (req, res) {});
+router.post("/", function (req, res) {
+  res.end("/");
+});
 
-router.get("/register", function (req, res) {});
+router.get("/register", function (req, res) {
+  res.render("register.ejs");
+});
 router.post("/register", function (req, res) {});
 
-// app.get("/test", (req, res) => {
-//   console.log("Прошли по пути тест");
-//   res.end("Hello");
-// });
+router.get("/login", function (req, res) {
+  res.render("login.ejs");
+});
+router.post("/login", function (req, res) {});
 
-// app.post("/test", (req, res) => {
-//   console.log("Прошли по пути post test");
-//   console.log(req.body);
-//   res.end("Прошли по пути post test");
-//   addLine("Пинганули post запрос ");
-// });
+router.get("/test", function (req, res) {
+  res.end("/test");
+});
+router.post("/test", function (req, res) {
+  console.log("Прошли по пути post/test");
+  res.end("post/test");
+});
+
 module.exports = router;
