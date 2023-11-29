@@ -1,16 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const register = require("../controllers/register");
 
-router.get("/", (req, res) => {
-  res.end("/");
-});
-router.post("/", function (req, res) {
-  res.end("/");
-});
+// router.get("/register", function (req, res) {
+//   res.render("register.ejs");
+// });
+// router.post("/register", function (req, res) {});
 
-router.get("/register", function (req, res) {
-  res.render("register.ejs");
-});
+router.get("/register", register.form);
 router.post("/register", function (req, res) {});
 
 router.get("/login", function (req, res) {
@@ -25,5 +22,4 @@ router.post("/test", function (req, res) {
   console.log("Прошли по пути post/test");
   res.end("post/test");
 });
-
 module.exports = router;

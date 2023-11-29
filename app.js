@@ -1,27 +1,21 @@
 const express = require("express");
 const favicon = require("express-favicon");
-const fs = require("fs");
 const path = require("path");
-const { nextTick } = require("process");
+const fs = require("fs");
 const ejs = require("ejs");
-
-const app = express();
+const app = express("");
 const myRoutes = require("./routers/index_routers");
-const port = "3000";
-
 app.use(express.json());
 app.use(express.urlencoded({ extendend: true }));
 
 app.use(myRoutes);
-
-
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-
+app.use(express.static(path.join(__dirname, "views")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
-  "/css/bootstrap.css",
+  "css/bootstrap.css",
   express.static(
     path.join(
       __dirname,
@@ -30,25 +24,7 @@ app.use(
   )
 );
 
-
-
-function logger(port, router) {
-  fs.appendFile(
-    filePath,
-    `\nЛогируем ping по адресу localhost:${port}${router}. Время: ${new Date()}`,
-    (err) => {
-      if (err) console.error(err);
-      console.log("файл переписан");
-    }
-  );
-}
-console.log(app.get("env"));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "css")));
-app.use(express.static(path.join(__dirname, "views")));
+const port = "3000";
 
 app.listen(port, function () {
   console.log("Сервер запущен порт " + port);

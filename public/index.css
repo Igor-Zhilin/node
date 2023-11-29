@@ -459,25 +459,4 @@ p {
   color: #6f77a4;
   text-align: center;
   font-size: 30px;
-}
-.register-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15vh;
-}
-.register-content div {
-  max-width: 1000px;
-}
-
-.login-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 22vh;
-}
-.login-content div {
-  max-width: 1000px;
-
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */
