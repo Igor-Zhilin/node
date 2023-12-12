@@ -4,16 +4,25 @@ const fs = require("fs");
 const path = require("path");
 const { nextTick } = require("process");
 const ejs = require("ejs");
+const session = require("express-session");
 
 const app = express();
 const myRoutes = require("./routers/index_routers");
+const userSession = require("./middleWare/user_session")
+
 const port = "3000";
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "views")));
-
+app.use(
+  session({
+      secret: 'aboba',
+      resave: false,
+      saveUninitialized: true,
+  })
+);
 app.use(
   "/css/bootstrap.css",
   express.static(
