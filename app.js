@@ -8,7 +8,21 @@ const ejs = require("ejs");
 const app = express();
 const myRoutes = require("./routers/index_routers");
 const port = "3000";
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "css")));
+app.use(express.static(path.join(__dirname, "views")));
 
+app.use(
+  "/css/bootstrap.css",
+  express.static(
+    path.join(
+      __dirname,
+      "public/css/bootstrap-5.3.2/dist/css/bootstrap.min.css"
+    )
+  )
+);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -32,21 +46,7 @@ function logger(port, router) {
 
 console.log(app.get("env"));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "css")));
-app.use(express.static(path.join(__dirname, "views")));
 
-app.use(
-  "/css/bootstrap.css",
-  express.static(
-    path.join(
-      __dirname,
-      "public/css/bootstrap-5.3.2/dist/css/bootstrap.min.css"
-    )
-  )
-);
 
 app.use(favicon(__dirname + "/public/favicon.ico"));
 

@@ -1,9 +1,11 @@
+const User = require('../models/user')
+
 exports.form = (req, res) => {
-  res.render("loginForm", {});
+  res.render("loginForm", {title:"Login"});
 };
 
 exports.submit = (req, res, next) => {
-  // if(!Игорь в базе данный есть?){
-  // }
-  // User.create(req.body.user, cb);
+User.authentificate(req.body.loginForm, (err,data)=>{
+  
+})
 };
