@@ -10,17 +10,11 @@ db.run(sql);
 
 class User {
   constructor() {}
-  static async create(dataForm, next, cb) {
-    try {
-      const salt = await bcrypt.genSalt(10);
-      const hash = await bcrypt.hash(dataForm.password, salt);
 
-      const sql1 =
-        "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
-      db.run(sql1, dataForm.name, dataForm.email, hash, dataForm.age, cb);
-    } catch (error) {
-      if (error) return next(error);
-    }
+  static create(dataForm, next, cb) {
+    const sql1 =
+      "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
+    db.run(sql1, dataForm.name, dataForm.email, dataForm.password, dataForm.age, cb);
   }
 
   static findByEmail(email, cb) {
@@ -32,16 +26,15 @@ class User {
       if (error) return cb(error);
       if (!user) return cb();
 
-      const result = bcrypt.compare(
-        dataForm.password,
-        user.password,
-        (err, result) => {
-          if (result) return cb(null, user);
-          cb();
-        }
-      );
+      if (dataForm.password === user.password) {
+        return cb(null, user);
+      } else {
+        return cb();
+      }
     });
   }
 }
 
 module.exports = User;
+
+

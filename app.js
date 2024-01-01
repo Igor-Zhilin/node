@@ -16,24 +16,6 @@ app.set("views", path.join(__dirname, "views"));
 
 const filePath = path.join(__dirname, "tmp", "1.txt");
 
-// fs.writeFile(filePath, `Сервер запущен. Порт: ${port}`, (err) => {
-//   if (err) console.error(err);
-//   console.log("файл создан");
-// });
-
-// function logger(port, router) {
-//   fs.appendFile(
-//     filePath,
-//     `\nЛогируем ping по адресу localhost:${port}${router}. Время: ${new Date()}`,
-//     (err) => {
-//       if (err) console.error(err);
-//       console.log("файл переписан");
-//     }
-//   );
-// }
-
-// console.log(app.get("env"));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
