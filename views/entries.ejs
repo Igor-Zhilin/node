@@ -33,10 +33,10 @@
                 <h6>Запостил :   <%= entry.username %> </h6>                
                 <% if(locals.user){ %>
                 <a href="/update/<%= entry.id %>" class="btn-update">
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-file-pen"></i>
                 </a>
             <button class="btn-delete" data-id="<%=entry.id%>">
-                    <i class="fas fa-trash-alt" data-id="<%=entry.id%>"></i>
+                <i class="fa-solid fa-ban" data-id="<%=entry.id%>"></i>
             </button>
                 <%}%>
                 

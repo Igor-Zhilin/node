@@ -25,8 +25,7 @@
     <header><%- include('./partials/header'); %></header>
 
     <div class="main">
-      <input type="checkbox" id="chk" aria-hidden="true" />
-
+    
       <div class="signup">
         <form method="post" name="user">
           <label for="chk" aria-hidden="true">Регистрация</label>
@@ -38,12 +37,12 @@
             placeholder="Пароль"
             required=""
           />
-          <input type="age" name="age" placeholder="Возвраст" required="" />
+          <input type="age" name="age" placeholder="Возраст" required="" />
           <button>Регистрация</button>
         </form>
       </div>
+    
     </div>
-
-    <footer><%- include('./partials/footer')%></footer>
+    <footer><%- include('./partials/footer'); %></footer>
   </body>
 </html>

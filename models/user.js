@@ -11,12 +11,19 @@ class User {
   constructor() {}
   static async create(dataForm, cb) {
     try {
-
-      const sql1 =
-        "INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)";
-      db.run(sql1, dataForm.name, dataForm.email, dataForm.password, dataForm.age, cb);
+      if (dataForm.password.length < 5) {
+        throw new Error('*Пароль должен содержать не менее 5 символов.');
+      }
+  
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+      if (!passwordRegex.test(dataForm.password)) {
+        throw new Error('*Пароль должен содержать хотя бы одну букву и одну цифру.');
+      }
+  
+      const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
+      db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], cb);
     } catch (error) {
-      if (error) return next(error);
+      return cb(error);
     }
   }
 
