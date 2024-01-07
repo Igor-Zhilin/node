@@ -12,12 +12,12 @@ class User {
   static async create(dataForm, cb) {
     try {
       if (dataForm.password.length < 5) {
-        throw new Error('*Пароль должен содержать не менее 5 символов.');
+        throw new Error('Пароль должен содержать не менее 5 символов');
       }
   
       const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
       if (!passwordRegex.test(dataForm.password)) {
-        throw new Error('*Пароль должен содержать хотя бы одну букву и одну цифру.');
+        throw new Error('Пароль должен содержать хотя бы одну букву и одну цифру');
       }
   
       const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
@@ -34,9 +34,16 @@ class User {
   static authentificate(dataForm, cb) {
     User.findByEmail(dataForm.email, (error, user) => {
       if (error) return cb(error);
-      if (!user) return cb();
+      if (!user) return cb(); // Пользователь не найден
+  
+      if (dataForm.password !== user.password) {
+        return cb(); // Неверный пароль
+      }
+  
+      cb(null, user); // Аутентификация успешна
     });
   }
+  
 }
 
 module.exports = User;
