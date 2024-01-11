@@ -24,7 +24,7 @@ class User {
   
 const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/g;
 if (!emailRegex.test(dataForm.email)) {
-  throw new Error('почта задана не верно');
+  throw new Error('введите почту правильно)');
 }
 
       const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
