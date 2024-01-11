@@ -1,5 +1,5 @@
 const User = require("../models/user");
-
+const validator = require("validator");
 // Отображение формы для входа пользователя
 exports.form = (req, res) => {
   res.render("loginForm", { title: "Login" });

@@ -22,6 +22,11 @@ class User {
         throw new Error('Пароль должен содержать хотя бы одну букву и одну цифру');
       }
   
+const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/g;
+if (!emailRegex.test(dataForm.email)) {
+  throw new Error('почта задана не верно');
+}
+
       const sql = 'INSERT INTO users (name, email, password, age) VALUES (?, ?, ?, ?)';
       db.run(sql, [dataForm.name, dataForm.email, dataForm.password, dataForm.age], cb);
     } catch (error) {

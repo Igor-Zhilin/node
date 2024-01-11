@@ -20,7 +20,8 @@
     "method-override": "^3.0.0",
     "mysql2": "^3.6.5",
     "sass": "^1.69.5",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
