@@ -1,20 +1,29 @@
-const express = require("express");
-const favicon = require("express-favicon");
-const fs = require("fs");
-const path = require("path");
-const { nextTick } = require("process");
-const ejs = require("ejs");
-const session = require("express-session");
-const methodOverride = require("method-override");
+// Подключение необходимых модулей
+const express = require("express"); // Express фреймворк
+const favicon = require("express-favicon"); // Модуль для установки favicon
+const fs = require("fs"); // Модуль для работы с файловой системой
+const path = require("path"); // Модуль для работы с путями к файлам и директориям
+const { nextTick } = require("process"); // Модуль для работы с процессами
+const ejs = require("ejs"); // Шаблонизатор EJS
+const session = require("express-session"); // Модуль для работы с сессиями
+const methodOverride = require("method-override"); // Модуль для поддержки HTTP-метода PUT и DELETE
 
-const userSession = require("./middleware/user_session");
+// Пользовательские промежуточные обработчики
+const userSession = require("./middleware/user_session"); // Пользовательская сессия
+
+// Создание экземпляра приложения Express
 const app = express();
+
+// Импорт маршрутов из файла index_routers
 const myRoutes = require("./routers/index_routers");
+
+// Установка номера порта
 const port = "3000";
 
+// Путь к файлу
 const filePath = path.join(__dirname, "tmp", "1.txt");
 
-//MySql server conection
+// Подключение к серверу MySQL
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
   host: "localhost",
@@ -31,21 +40,22 @@ connection.connect((err) => {
   }
 });
 
-//
-
+// Установка шаблонизатора и директории для представлений
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Вывод информации о среде выполнения
 console.log(app.get("env"));
 
+// Настройка промежуточных обработчиков
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "views")));
-
 app.use(methodOverride("_method"));
 
+// Настройка сессий
 app.use(
   session({
     secret: "aboba",
@@ -54,6 +64,7 @@ app.use(
   })
 );
 
+// Обслуживание CSS-файла Bootstrap
 app.use(
   "/css/bootstrap.css",
   express.static(
@@ -64,19 +75,22 @@ app.use(
   )
 );
 
+// Обслуживание favicon
 app.use(favicon(__dirname + "/public/favicon.ico"));
 
+// Использование пользовательских промежуточных обработчиков и маршрутов
 app.use(userSession);
 app.use(myRoutes);
 
+// Запуск сервера
 app.listen(port, () => {
-  console.log(`listen on port ${port}`);
+  console.log(`Сервер запущен на порту ${port}`);
 });
 
-app.get("env") == "production";
-
+// Проверка окружения для продакшена
 console.log(app.get("env"));
 
+// Обработка ошибок для окружения продакшена
 if (app.get("env") == "production") {
   app.use((req, res, err) => {
     res.status(err.status);
@@ -84,13 +98,14 @@ if (app.get("env") == "production") {
   });
 }
 
-//ERROR HANDLER
+// ОБРАБОТЧИК ОШИБОК - Обработка ошибок 404
 app.use((req, res, next) => {
-  const err = new Error("Could't get path");
+  const err = new Error("Не удалось получить путь");
   err.status = 404;
   next(err);
 });
 
+// Обработка ошибок в зависимости от окружения
 if (app.get("env") != "development") {
   app.use(function (err, req, res, next) {
     console.log(err.status, err.message);
