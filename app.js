@@ -7,7 +7,7 @@ const { nextTick } = require("process"); // Модуль для работы с 
 const ejs = require("ejs"); // Шаблонизатор EJS
 const session = require("express-session"); // Модуль для работы с сессиями
 const methodOverride = require("method-override"); // Модуль для поддержки HTTP-метода PUT и DELETE
-
+const message = require("./middleWare/message")
 // Пользовательские промежуточные обработчики
 const userSession = require("./middleware/user_session"); // Пользовательская сессия
 
@@ -31,6 +31,8 @@ const connection = mysql.createConnection({
   database: "server",
   password: "2208",
 });
+
+
 
 connection.connect((err) => {
   if (err) {
@@ -77,6 +79,23 @@ app.use(
 
 // Обслуживание favicon
 app.use(favicon(__dirname + "/public/favicon.ico"));
+
+app.use(message);
+// Миддлвэр для проверки существующего сеанса пользователя
+module.exports = function (req, res, next) {
+  // Если email пользователя не сохранен в сессии, перейти к следующему маршруту
+  if (!req.session.userEmail) return next();
+  // Найти пользователя по email
+  User.findByEmail(req.session.userEmail, (error, userData) => {
+    // Если произошла ошибка, передать управление обработчику ошибок
+    if (error) return next(error);
+    // Если пользователь найден, сохранить данные пользователя в объект запроса и объект ответа
+    if (userData) req.user = res.locals.user = userData;
+    // Перейти к следующему маршруту
+    next();
+  });
+};
+
 
 // Использование пользовательских промежуточных обработчиков и маршрутов
 app.use(userSession);

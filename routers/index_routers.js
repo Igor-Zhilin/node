@@ -3,6 +3,7 @@ const router = express.Router();
 const register = require("../controllers/register");
 const login = require("../controllers/login");
 const entries = require("../controllers/entries");
+const validate = require("../middleWare/validate");
 
 // Главная страница, отображение списка записей
 router.get("/", entries.list);
@@ -11,6 +12,7 @@ router.get("/", entries.list);
 router.get("/post", entries.form);
 // Обработка отправки новой записи
 router.post("/post", entries.submit);
+router.post("/post", validate.required("entry[title]"),validate.required("entry[content]"), validate.lengthAbove("entry[title]") ,entries.submit);
 
 // Форма для обновления записи
 router.get("/update/:id", entries.updateForm);

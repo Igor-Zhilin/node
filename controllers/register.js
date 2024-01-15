@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const { validateEmail, validatePassword } = require("../middleWare/validation");
 
 // Отображение формы для регистрации пользователя
 exports.form = (req, res) => {
