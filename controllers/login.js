@@ -10,7 +10,7 @@ exports.submit = (req, res, next) => {
   User.authentificate(req.body.loginForm, (error, data) => {
     if (error) return next(error);
     if (!data) {
-      console.log("Имя или пароль неверный");
+     res.error("Имя или пароль неверный");
       res.redirect("back"); // Перенаправление на предыдущую страницу в случае неверных данных
     } else {
       req.session.userEmail = data.email; // Сохранение email пользователя в сессии

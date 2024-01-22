@@ -11,7 +11,7 @@ exports.submit = (req, res, next) => {
   User.findByEmail(req.body.email, (error, user) => {
     if (error) return next(error);
     if (user) {
-      console.log("Такой пользователь в базе уже существует");
+      res.error("Такой пользователь в базе уже существует");
       res.redirect("/"); // Перенаправление на главную страницу, если пользователь уже существует
     } else {
       // Создание нового пользователя

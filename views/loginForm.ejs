@@ -18,11 +18,13 @@
   <script src="./css/but.js"></script>
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css/register.css" />
-
     <title><%=title%></title>
   </head>
   <body>
-    <header><%- include('./partials/header'); %></header>
+    <%- include ('./partials/menu') %>
+    <%- include ('./partials/messages') %>
+    <header><%- include('./partials/header') %></header>
+   
     <section class="login-content">
         <div class="container-fluid">
         <h1 class="text-center">Авторизация</h1>

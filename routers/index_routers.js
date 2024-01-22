@@ -13,6 +13,7 @@ router.get("/post", entries.form);
 // Обработка отправки новой записи
 router.post("/post", entries.submit);
 router.post("/post", validate.required("entry[title]"),validate.required("entry[content]"), validate.lengthAbove("entry[title]") ,entries.submit);
+validate.lengthAbove(("entry[title",4),entries.submit)
 
 // Форма для обновления записи
 router.get("/update/:id", entries.updateForm);
