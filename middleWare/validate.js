@@ -1,38 +1,38 @@
-exports.getField = (field, req) => {
-    let value;
-    field.forEach(element => {
-        value = req.body[element];
-    });
+const getField = (req, parsedField) => {
+    let value = req.body;
+    for (let field of parsedField) {
+        value = value[field];
+    }
     return value;
 };
 
 function parseField(field) {
-    if (typeof field === 'string') {
-        return field.split(/\[|\]/).filter((s) => s !== '');
+    if (typeof field === "string") {
+        return field.split(/\[|\]/).filter((s) => s !== "");
     } else {
         return [field];
     }
 }
 
 exports.required = (field) => {
-    field = parseField(field);
+    let parsedField = parseField(field);
     return (req, res, next) => {
-        if (exports.getField(field, req)) {
+        if (getField(req, parsedField)) {
             next();
         } else {
-            req.session.error = "Required"; // сохраняем сообщение об ошибке в сессии
+            req.session.error =(`Поле ${field} не заполнено`); // сохраняем сообщение об ошибке в сессии
             res.redirect("back");
         }
     };
 };
 
 exports.lengthAbove = (field, len) => {
-    field = parseField(field);
+    let parsedField = parseField(field);
     return (req, res, next) => {
-        if (exports.getField(field, req).length > len) {
+        if (getField(req, parsedField).length > len) {
             next();
         } else {
-            req.session.error = "Length should be above " + len; // сохраняем сообщение об ошибке в сессии
+            req.session.error = "Длина поля должна быть больше " + len; // сохраняем сообщение об ошибке в сессии
             res.redirect("back");
         }
     };
