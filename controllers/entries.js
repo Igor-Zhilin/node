@@ -1,3 +1,4 @@
+const logger = require("../logger/index")
 const Entry = require("../models/entry");
 
 // Отображение списка записей
@@ -7,12 +8,14 @@ exports.list = (req, res, next) => {
 
     const userData = req.user; // Получение данных пользователя из запроса
     res.render("entries", { title: "List", entries: entries, user: userData });
+    logger.info("Зашли на главную страницу")
   });
 };
 
 // Отображение формы для создания записи
 exports.form = (req, res) => {
   res.render("post", { title: "Post" });
+  logger.warning("Зашли на страницу создания постов")
 };
 
 // Обработка отправки новой записи

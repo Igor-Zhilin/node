@@ -9,6 +9,7 @@ const validate = require("../middleWare/validate");
 router.get("/", entries.list);
 
 // Форма для создания новой записи
+
 router.get("/post", entries.form);
 // Обработка отправки новой записи
 router.post("/post", entries.submit);

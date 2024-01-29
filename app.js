@@ -11,18 +11,20 @@ const message = require("./middleWare/message")
 // Пользовательские промежуточные обработчики
 const userSession = require("./middleware/user_session"); // Пользовательская сессия
 
+// const morgan = require("morgan")
 // Создание экземпляра приложения Express
 const app = express();
 
 // Импорт маршрутов из файла index_routers
 const myRoutes = require("./routers/index_routers");
+require(("dotenv")).config()
 
 // Установка номера порта
-const port = "3000";
-
+const port = process.env.PORT || "3000";
+app.set('port', port)
 // Путь к файлу
 const filePath = path.join(__dirname, "tmp", "1.txt");
-
+// /
 // Подключение к серверу MySQL
 const mysql = require("mysql2");
 const connection = mysql.createConnection({
@@ -60,7 +62,7 @@ app.use(methodOverride("_method"));
 // Настройка сессий
 app.use(
   session({
-    secret: "aboba",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
   })
@@ -103,7 +105,7 @@ app.use(myRoutes);
 
 // Запуск сервера
 app.listen(port, () => {
-  console.log(`Сервер запущен на порту ${port}`);
+  console.log(`Сервер запущен на порту` + port);
 });
 
 // Проверка окружения для продакшена
