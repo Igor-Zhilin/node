@@ -1,0 +1,7 @@
+<% if (locals.messages) { %>
+    <% locals.messages.forEach((element) => { %>
+      <h2 class="<%= element.type %>"><%= element.string %></h2>
+    <% }) %>
+    <% removeMessages() %>
+  <% } %>
+  
