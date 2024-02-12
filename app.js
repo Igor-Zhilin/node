@@ -10,6 +10,7 @@ const message = require("./middleware/message");
 const messanger = "https://kappa.lol/iSONv";
 const link = "https://kappa.lol/VMimi";
 const bodyParser = require("body-parser");
+const logger = require("./logger/index");
 // const morgan = require("morgan");
 const winston = require("winston");
 const app = express();
@@ -63,7 +64,7 @@ app.get("/", (req, res) => {
 app.use(adminRoutes);
 
 app.listen(port, () => {
-  console.log(`Сервер запущен на порту ` + port);
+  logger.info(`Сервер запущен на порту ` + port);
 });
 
 if (app.get("env") != "development") {

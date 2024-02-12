@@ -2,6 +2,8 @@ const User = require("../models/user");
 const validator = require("validator");
 const link = "https://kappa.lol/VMimi";
 const messanger = "https://kappa.lol/iSONv";
+const logger = require("../logger/index");
+const winston = require("winston");
 
 exports.form = (req, res) => {
   res.render("loginForm", { title: "Login", link: link, messanger: messanger });
@@ -28,6 +30,7 @@ exports.submit = (req, res, next) => {
         link: link,
         messanger: messanger,
       });
+      logger.error("Имя или пароль неверный")
       return;
     }
 
