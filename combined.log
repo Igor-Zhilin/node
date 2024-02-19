@@ -168,3 +168,103 @@
   level: 'info',
   timestamp: '2024-02-12T07:31:57.960Z'
 }
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T06:36:59.339Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:47:58.334Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:49:26.081Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:50:41.530Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:52:46.994Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-19T07:52:47.142Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:55:48.828Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:56:11.399Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:56:45.458Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:56:51.883Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:57:43.197Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:58:20.036Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-19T07:58:27.839Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:59:16.271Z'
+}
+{
+  message: 'Токен подготовлен: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicG9wYSIsImlhdCI6MTcwODMyOTU1OCwiZXhwIjoxNzA4MzMzMTU4fQ.oB6ED0zOZRlDjSBPqdbrMEK2zDZLUKCy-kf6vFpf9tk',
+  level: 'info',
+  timestamp: '2024-02-19T07:59:18.681Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-19T07:59:18.720Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:59:30.239Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T07:59:56.062Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T08:00:03.962Z'
+}
+{
+  message: 'Сервер запущен на порту 3000',
+  level: 'info',
+  timestamp: '2024-02-19T08:00:05.134Z'
+}

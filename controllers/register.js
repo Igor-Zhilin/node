@@ -5,6 +5,7 @@ const link = "https://kappa.lol/VMimi";
 const messanger = "https://kappa.lol/iSONv";
 const logger = require("../logger/index");
 const winston = require("winston");
+const jwt = require("jsonwebtoken");
 
 exports.form = (req, res) => {
   res.render("registerForm", { errors: {}, link: link, messanger: messanger });
@@ -12,7 +13,6 @@ exports.form = (req, res) => {
 
 exports.submit = (req, res, next) => {
   const { name, email, password } = req.body;
-
   User.findByEmail(email, (error, user) => {
     if (error) return next(error);
     if (user) {
@@ -25,6 +25,17 @@ exports.submit = (req, res, next) => {
         req.session.userName = name;
         res.redirect("/");
       });
+
+      const token = jwt.sign(
+        {
+          name: req.body.name
+        },
+        process.env.JWTTOCENSECRET = "aboba",
+        {
+          expiresIn: 60*60
+        }
+      );
+      logger.info("Токен подготовлен: " + token);
     }
   });
 };
