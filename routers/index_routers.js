@@ -7,6 +7,7 @@ const entries = require("../controllers/entries");
 const validate = require("../middleware/validate");
 const Entry = require('../models/entry');
 const multer = require("multer");
+const passport = require("passport")
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
@@ -26,7 +27,7 @@ router.get("/post", entries.form);
 
 router.post(
   "/post",
-  upload.single("entryImage"), 
+  passport.authenticate("jwt", {session:false}) ,
   validate.required("[entry[title]]"),
   validate.required("[entry[content]]"),
   validate.lengthAbove("[entry[title]]", 4),

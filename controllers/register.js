@@ -1,3 +1,4 @@
+
 const User = require("../models/user");
 // const {emailValidation, passValidation}  = require("../middleware/validation");
 
@@ -27,22 +28,22 @@ exports.submit = (req, res, next) => {
         // Генерация токена
         const token = jwt.sign(
           {
-            name: req.body.name
+            name: req.body.name,
           },
           process.env.JWTTOCENSECRET || "aboba",
           {
-            expiresIn: 60*60
+            expiresIn: 60 * 60,
           }
         );
         res.cookie("jwt", token, {
-          httpOnly:true,
-          maxAge: 60*60
-        })
-        logger.info("Токен подготовлен: " + token)
+          httpOnly: true,
+          maxAge: 60 * 60,
+        });
+        console.log("Токен подготовлен: " + token);
         // Добавляем токен в ответ
 
         logger.info("Токен подготовлен: " + token);
-        res.redirect("/")
+        res.redirect("/");
       });
     }
   });

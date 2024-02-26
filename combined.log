@@ -358,3 +358,78 @@
   level: 'info',
   timestamp: '2024-02-26T08:29:12.817Z'
 }
+{
+  message: 'Токен подготовлен (на странице login): eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDg5MzY1MjQsImV4cCI6MTcwODk0MDEyNH0.q6o9cHf0NvAcp6iRQQSpetJtLjEvgm2Bic94UHqZZys',
+  level: 'info',
+  timestamp: '2024-02-26T08:35:24.029Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-26T08:35:24.063Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-26T08:35:45.484Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T08:43:39.120Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T08:43:45.466Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T08:44:44.335Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-26T08:49:17.137Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-26T08:49:24.204Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-26T08:49:32.729Z'
+}
+{
+  message: 'Зашли на страницу',
+  level: 'info',
+  timestamp: '2024-02-26T08:49:45.828Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T10:12:54.213Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T10:12:58.391Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T10:18:12.153Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T10:19:31.724Z'
+}
+{
+  message: 'Сервер запущен на порту3000',
+  level: 'info',
+  timestamp: '2024-02-26T10:19:48.148Z'
+}

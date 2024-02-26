@@ -31,32 +31,33 @@ exports.submit = (req, res, next) => {
         link: link,
         messanger: messanger,
       });
-      logger.error("Имя или пароль неверный")
+      logger.error("Имя или пароль неверный");
       return;
     }
 
     req.session.userEmail = data.email;
     req.session.userName = data.name;
-    
+
     const token = jwt.sign(
       {
-        name: req.body.name
+        name: req.body.name,
       },
       process.env.JWTTOCENSECRET || "aboba",
       {
-        expiresIn: 60*60
+        expiresIn: 60 * 60,
       }
     );
     res.cookie("jwt", token, {
-      httpOnly:true,
-      maxAge: 60*60
-    })
-    logger.info("Токен подготовлен (на странице login): " + token)
+      httpOnly: true,
+      maxAge: 60 * 60,
+    });
+    console.log("Токен подготовлен (на странице login): " + token);
     res.redirect("/");
   });
 };
 
 exports.logout = (req, res, next) => {
+  res.clearCookie("jwt");
   req.session.destroy((err) => {
     if (err) return next(err);
     res.redirect("/login");
