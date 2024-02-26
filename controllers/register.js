@@ -23,19 +23,27 @@ exports.submit = (req, res, next) => {
         if (err) return next(err);
         req.session.userEmail = email;
         req.session.userName = name;
-        res.redirect("/");
-      });
 
-      const token = jwt.sign(
-        {
-          name: req.body.name
-        },
-        process.env.JWTTOCENSECRET = "aboba",
-        {
-          expiresIn: 60*60
-        }
-      );
-      logger.info("Токен подготовлен: " + token);
+        // Генерация токена
+        const token = jwt.sign(
+          {
+            name: req.body.name
+          },
+          process.env.JWTTOCENSECRET || "aboba",
+          {
+            expiresIn: 60*60
+          }
+        );
+        res.cookie("jwt", token, {
+          httpOnly:true,
+          maxAge: 60*60
+        })
+        logger.info("Токен подготовлен: " + token)
+        // Добавляем токен в ответ
+
+        logger.info("Токен подготовлен: " + token);
+        res.redirect("/")
+      });
     }
   });
 };

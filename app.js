@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser")
 const adminRoutes = require("./controllers/admin");
 const session = require("express-session");
 const message = require("./middleware/message");
@@ -64,7 +65,7 @@ app.get("/", (req, res) => {
 app.use(adminRoutes);
 
 app.listen(port, () => {
-  logger.info(`Сервер запущен на порту ` + port);
+  logger.info("Сервер запущен на порту"  + port);
 });
 
 if (app.get("env") != "development") {
